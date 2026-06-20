@@ -1351,9 +1351,9 @@ async function loadTrending(){
   skelGrid(g,12);
   const sort=document.getElementById('home-sort').value;
   const type=homeTypeFilter;
-  const path=type
-    ? `/top/anime?type=${type}&filter=${sort}&limit=12`
-    : `/top/anime?filter=${sort}&limit=12`;
+ const path=type
+  ? `/seasons/now?type=${type}&limit=12`
+  : `/seasons/now?limit=12`;
   const res=await apiFetch(path);
   if(!res?.data){g.innerHTML='<p style="color:var(--muted);padding:20px">Failed to load.</p>';return;}
   g.innerHTML=res.data.map(cardHTML).join('');
