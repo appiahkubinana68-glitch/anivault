@@ -573,23 +573,23 @@ nav{
 .legal-page .last-updated{font-size:12px;color:var(--muted);margin-bottom:20px}
 
 /* ═══════════════════════════════════════════════════════
-   BROWSE / FILTER PAGES
+    / FILTER PAGES
 ═══════════════════════════════════════════════════════ */
-.browse-controls{
+.-controls{
   display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:20px
 }
-.browse-input{
+.-input{
   flex:1;min-width:180px;background:var(--card);border:1px solid var(--border);
   border-radius:8px;padding:9px 14px;color:var(--white);font-size:13px;font-family:inherit
 }
-.browse-input:focus{outline:none;border-color:var(--red)}
-.browse-input::placeholder{color:var(--muted)}
-.browse-sel{
+.-input:focus{outline:none;border-color:var(--red)}
+.-input::placeholder{color:var(--muted)}
+.-sel{
   background:var(--card);color:var(--grey);border:1px solid var(--border);
   border-radius:8px;padding:9px 12px;font-size:12px;font-family:inherit;cursor:pointer
 }
-.browse-sel:focus{outline:none;border-color:var(--red)}
-.browse-sel option{background:var(--card)}
+.-sel:focus{outline:none;border-color:var(--red)}
+.-sel option{background:var(--card)}
 
 /* ═══════════════════════════════════════════════════════
    HISTORY PAGE
@@ -674,7 +674,7 @@ footer{background:var(--dark);border-top:1px solid var(--border);padding:40px 20
     <div class="logo" onclick="nav('home')">Nanz<em>.to</em></div>
     <div class="nav-links" id="nav-links">
       <a href="#" id="nl-home"   onclick="nav('home');return false">Home</a>
-      <a href="#" id="nl-browse" onclick="nav('browse');return false">Browse</a>
+      <a href="#" id="nl-" onclick="nav('');return false"></a>
       <a href="#" id="nl-seasonal" onclick="nav('seasonal');return false">Seasonal</a>
       <a href="#" id="nl-top"    onclick="nav('top');return false">Top Rated</a>
       <a href="#" id="nl-movies" onclick="nav('movies');return false">Movies</a>
@@ -1442,9 +1442,10 @@ async function browseFetch(page=1){
     if(type)  path+=`&type=${type}`;
     if(status)path+=`&status=${status}`;
   }else{
-    path=`/top/anime?limit=24&page=${page}&filter=${sort}`;
-    if(type)  path+=`&type=${type}`;
-  }
+  path = `/top/anime?filter=${sort}&limit=24&page=${page}`;
+  if(type)   path += `&type=${type}`;
+  if(status) path += `&status=${status}`;
+}
   const res=await apiFetch(path);
   if(!res?.data){if(page===1)g.innerHTML='<p style="color:var(--muted);padding:20px">No results found.</p>';return;}
   if(page===1) g.innerHTML=res.data.map(cardHTML).join('');
