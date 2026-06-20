@@ -1442,9 +1442,10 @@ async function browseFetch(page=1){
     if(type)  path+=`&type=${type}`;
     if(status)path+=`&status=${status}`;
  }else{
-  path='/top/anime?filter=${sort}&limit=24&page=${page}';
-  if(type)   path += '&type=${type}';
-  if(status) path += '&status=${status}';
+  // ✅ FULL LIBRARY, ALL SORTS SUPPORTED
+  path = `/top/anime?filter=${sort}&limit=24&page=${page}`;
+  if (type)   path += `&type=${type}`;
+  if (status) path += `&status=${status}`;
 }
   const res=await apiFetch(path);
   if(!res?.data){if(page===1)g.innerHTML='<p style="color:var(--muted);padding:20px">No results found.</p>';return;}
