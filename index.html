@@ -971,7 +971,7 @@ footer{background:var(--dark);border-top:1px solid var(--border);padding:40px 20
       <select class="browse-sel" id="br-sort" onchange="browseFetch(1)">
         <option value="bypopularity">Most Popular</option>
         <option value="score">Highest Rated</option>
-        <option value="byvoteusers">Most Voted</option>
+        <option value="byvotes">Most Voted</option>
       </select>
     </div>
     <div class="anime-grid" id="grid-browse"></div>
@@ -1441,11 +1441,10 @@ async function browseFetch(page=1){
     path=`/anime?genres=${genre}&limit=24&page=${page}&order_by=score&sort=desc`;
     if(type)  path+=`&type=${type}`;
     if(status)path+=`&status=${status}`;
- }else{
-  // ✅ FULL LIBRARY, ALL SORTS SUPPORTED
+}else{
   path = `/top/anime?filter=${sort}&limit=24&page=${page}`;
-  if (type)   path += `&type=${type}`;
-  if (status) path += `&status=${status}`;
+  if(type) path+= `&type=${type}`;
+  if(status) path+= `&status=${status}`;
 }
   const res=await apiFetch(path);
   if(!res?.data){if(page===1)g.innerHTML='<p style="color:var(--muted);padding:20px">No results found.</p>';return;}
