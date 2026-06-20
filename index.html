@@ -1632,8 +1632,14 @@ function setServer(idx,btn){
     {name:'Bilibili',    url:`https://www.bilibili.tv/en/search?keyword=${q}`,        note:'Search on Bilibili TV'},
     {name:'Tubi',        url:`https://tubitv.com/search/${q}`,                        note:'Search on Tubi (Free)'},
     {name:'Pluto TV',    url:`https://pluto.tv/search#${q}`,                          note:'Search on Pluto TV (Free)'},
+    {name:'Crunchyroll',  url:`https://www.crunchyroll.com/search?q=${q}`,                note:'Search on Crunchyroll'},
+    {name:'Netflix',      url:`https://www.netflix.com/search?q=${q}`,                    note:'Search on Netflix'},
+    {name:'Funimation',   url:`https://www.funimation.com/search?q=${q}`,                 note:'Search on Funimation'},
+    {name:'BBC iPlayer',  url:`https://www.bbc.co.uk/iplayer/search?q=${q}`,              note:'Search on BBC iPlayer'},
+    {name:'Amazon Prime Video', url:`https://www.primevideo.com/search?k=${q}`,          note:'Search on Prime Video'},
+   {name:'HiDIVE',       url:`https://www.hidive.com/search?q=${q}`,                    note:'Search on HiDIVE'}
   ];
-  const s=servers[idx]||servers[0];
+  const s=servers[idx]??servers[0];
   showVideoPlaceholder(
     `Click below to watch Ep ${currentEp} of "${a.title_english||a.title}" on ${s.name}.`,
     [{label:`Watch on ${s.name} →`, url:s.url}]
